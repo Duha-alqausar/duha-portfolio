@@ -40,16 +40,120 @@ const cases: CaseStudy[] = [
   }
 ]
 
-const miniProjects = [
-  ['FS Institute', 'Finance training SEO/SEM ecosystem'],
-  ['Biztech Academy', 'Business & tech academy acquisition system'],
-  ['Trekking Indonesia', 'Tourism platform web + booking growth'],
-  ['Guesthouse555nki', 'WA/IG AI admin automation'],
-  ['Proxsis HR & IT', 'AI admin + lead routing system'],
-  ['Digital Finger', 'Multi-division ops, tech, and growth system']
+
+type PortfolioItem = {
+  name: string
+  desc: string
+  type: string
+  href?: string
+}
+
+const portfolioGroups: { label: string; kicker: string; items: PortfolioItem[] }[] = [
+  {
+    label: 'Website Development',
+    kicker: 'End-to-end website build, UX optimization, and SEO structure',
+    items: [
+      ['karoseri-ckm.co.id', 'Karoseri company website', 'Website'],
+      ['loghos.id', 'Business / brand website', 'Website'],
+      ['proxcare.id', 'Corporate service website', 'Website'],
+      ['synnovac-capital.com', 'Capital & advisory website', 'Website'],
+      ['miminku.id', 'Product / brand website', 'Website'],
+      ['tamtam.co.id', 'Business website', 'Website'],
+      ['parakerja.com', 'Career / job ecosystem', 'Website'],
+      ['fs-institute.org', 'Finance training platform', 'Website + SEO'],
+      ['suarakampus.com', 'Media / campus publication', 'Website'],
+      ['mustafamotor.com', 'Automotive business website', 'Website'],
+      ['trekking.id', 'Tourism platform + booking growth', 'Website + Growth'],
+      ['inetz.com', 'Digital / technology website', 'Website'],
+      ['talkactive.co.id', 'Training / communication platform', 'Website + SEO']
+    ].map(([name, desc, type]) => ({ name, desc, type, href: `https://${name}` }))
+  },
+  {
+    label: 'SEO & SEM Ecosystem',
+    kicker: 'Corporate multi-brand visibility, paid search, and conversion funnels',
+    items: [
+      ['fs-institute.org', 'Finance training demand capture', 'SEO/SEM'],
+      ['grc-indonesia.com', 'GRC topic authority system', 'SEO System'],
+      ['ipqi.org', 'Quality & productivity training visibility', 'SEO/SEM'],
+      ['strategy.proxsisgroup.com', 'Strategy consulting search ecosystem', 'SEO'],
+      ['indonesiasafetycenter.org', 'Safety training acquisition', 'SEO/SEM'],
+      ['petrotrainingasia.com', 'Petroleum training demand generation', 'SEO/SEM'],
+      ['synergysolusi.com', 'HSE consulting growth engine', 'SEO + Growth'],
+      ['environment-indonesia.com', 'Environment consulting visibility', 'SEO'],
+      ['it.proxsisgroup.com', 'IT consulting lead generation', 'SEO/SEM'],
+      ['itgid.org', 'IT governance community funnel', 'SEO/SEM'],
+      ['isoindonesiacenter.com', 'ISO certification training funnel', 'SEO/SEM'],
+      ['icicert.com', 'Certification ecosystem visibility', 'SEO'],
+      ['biztechacademy.id', 'Business & tech academy acquisition', 'SEO/Paid'],
+      ['digital.proxsisgroup.com', 'Digital service search ecosystem', 'SEO'],
+      ['hr.proxsisgroup.com', 'HR consulting/training discovery', 'SEO'],
+      ['talkactive.co.id', 'Communication training visibility', 'SEO/SEM']
+    ].map(([name, desc, type]) => ({ name, desc, type, href: `https://${name}` }))
+  },
+  {
+    label: 'Social & Paid Ads',
+    kicker: 'Content-performance alignment, Meta Ads, and lead generation',
+    items: [
+      ['PHR & PHR Community', 'Community activation + lead-gen content', 'Meta Ads'],
+      ['PCG & PCC', 'Consulting ecosystem paid-social support', 'Paid Social'],
+      ['FSI', 'Finance training social acquisition', 'Meta Ads'],
+      ['Proxsis ITGRC', 'IT governance content-performance', 'Meta Ads'],
+      ['Biztech Academy', 'Business & tech education campaigns', 'Meta Ads'],
+      ['Proxsis Digital', 'Digital service campaign ecosystem', 'Paid Social'],
+      ['Ecosystem Group', 'Multi-brand coordination', 'Strategy'],
+      ['SS K3', 'Safety training social demand', 'Meta Ads'],
+      ['IEC', 'Environment consulting campaign support', 'Meta Ads'],
+      ['Petro Training', 'Training lead generation', 'Meta Ads'],
+      ['ISC', 'Safety center content activation', 'Meta Ads'],
+      ['Guesthouse555nki', 'Hospitality campaign + automation support', 'Social + AI']
+    ].map(([name, desc, type]) => ({ name, desc, type }))
+  },
+  {
+    label: 'AI & Automation Systems',
+    kicker: 'Workflow automation, WA/IG bots, and operational notification systems',
+    items: [
+      ['Guesthouse555nki WA/IG AI Admin', 'Automated customer response + scalable interaction', 'AI Bot'],
+      ['Proxsis HR & IT WA/IG AI Admin', 'Lead response automation and admin workload reduction', 'AI Bot'],
+      ['Content Production Workflow', 'Automated project-management notification system', 'n8n / Workflow'],
+      ['Reporting Framework', 'KPI, SEO, ads, and growth report systemization', 'Analytics'],
+      ['CRM & Lead Flow Design', 'Routing, follow-up, and lead management flow', 'Automation']
+    ].map(([name, desc, type]) => ({ name, desc, type }))
+  }
 ]
 
 const skills = ['Website Development', 'SEO Architecture', 'SEM / Google Ads', 'Meta Ads', 'CRO', 'AI Automation', 'n8n Workflow', 'GA4 / GSC', 'Reporting System', 'Growth Strategy']
+
+
+function PortfolioCarousel() {
+  return (
+    <div className="portfolio-carousel">
+      {portfolioGroups.map((group, groupIndex) => (
+        <div className="portfolio-row" key={group.label}>
+          <div className="portfolio-row-head">
+            <span>{String(groupIndex + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{group.label}</h3>
+              <p>{group.kicker}</p>
+            </div>
+            <em>Drag / scroll →</em>
+          </div>
+          <div className="portfolio-track" aria-label={`${group.label} portfolio list`}>
+            {group.items.map((item, index) => {
+              const card = (
+                <article className="portfolio-slide">
+                  <div className="slide-top"><span>{item.type}</span><b>{String(index + 1).padStart(2, '0')}</b></div>
+                  <h4>{item.name}</h4>
+                  <p>{item.desc}</p>
+                </article>
+              )
+              return item.href ? <a href={item.href} target="_blank" rel="noreferrer" key={`${group.label}-${item.name}`}>{card}</a> : <div key={`${group.label}-${item.name}`}>{card}</div>
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function ProjectShowcase({ item, index }: { item: CaseStudy; index: number }) {
   return (
@@ -150,18 +254,12 @@ function App() {
       </section>
 
       <section className="section mini-work">
-        <div className="section-title compact">
-          <span>More Ecosystem Work</span>
-          <h2>Not one-off execution. A multi-brand digital growth ecosystem.</h2>
+        <div className="section-title portfolio-title">
+          <span>Full Portfolio List</span>
+          <h2>Looks like one portfolio — but it carries a lot of digital ecosystems.</h2>
+          <p>All website, SEO/SEM, paid social, and automation work from the portfolio list — arranged as horizontal slides so it feels rich without making the page crowded.</p>
         </div>
-        <div className="mini-grid">
-          {miniProjects.map(([name, desc]) => (
-            <article key={name}>
-              <h3>{name}</h3>
-              <p>{desc}</p>
-            </article>
-          ))}
-        </div>
+        <PortfolioCarousel />
       </section>
 
       <section id="about" className="section about">
@@ -175,12 +273,14 @@ function App() {
         </div>
       </section>
 
-      <section id="contact" className="contact-section">
-        <p>Have a project, website, or growth system to build?</p>
-        <h2>Let's make it look impressive and work like a system.</h2>
-        <div>
-          <a href="mailto:duha.alqausar@gmail.com">duha.alqausar@gmail.com</a>
-          <a href="tel:+6282284570795">WhatsApp / Call</a>
+      <section id="contact" className="section contact-shell">
+        <div className="contact-section">
+          <p>Have a project, website, or growth system to build?</p>
+          <h2>Let's make it look impressive and work like a system.</h2>
+          <div>
+            <a href="mailto:duha.alqausar@gmail.com">duha.alqausar@gmail.com</a>
+            <a href="tel:+6282284570795">WhatsApp / Call</a>
+          </div>
         </div>
       </section>
     </main>
