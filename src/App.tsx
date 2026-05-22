@@ -1,85 +1,73 @@
 import './App.css'
 
-type Project = {
-  name: string
-  url: string
-  type: string
-  industry: string
-  role: string
-  impact: string
-  accent: 'blue' | 'green' | 'pink' | 'amber' | 'violet' | 'slate'
-  layout: 'saas' | 'corp' | 'media' | 'commerce' | 'dashboard' | 'automation'
+type CaseStudy = {
+  title: string
+  domain: string
+  category: string
+  summary: string
+  bullets: string[]
+  image?: string
+  accent: string
 }
 
-const websiteProjects: Project[] = [
-  { name: 'Synergy Solusi', url: 'synergysolusi.com', type: 'SEO + Website Growth', industry: 'HSSEE Consulting', role: 'SEO architecture, website optimization, funnel direction', impact: 'Built stronger organic visibility and client inquiry flow.', accent: 'green', layout: 'corp' },
-  { name: 'FS Institute', url: 'fs-institute.org', type: 'SEO / SEM Ecosystem', industry: 'Finance Training', role: 'Keyword architecture, content strategy, paid search', impact: 'Improved multi-channel discoverability for corporate training.', accent: 'blue', layout: 'saas' },
-  { name: 'GRC Indonesia', url: 'grc-indonesia.com', type: 'SEO Growth System', industry: 'Governance Risk Compliance', role: 'SEO structure, content mapping, technical optimization', impact: 'Strengthened authority around governance, risk, and compliance topics.', accent: 'violet', layout: 'dashboard' },
-  { name: 'ITGID', url: 'itgid.org', type: 'SEO + Conversion Funnel', industry: 'IT Governance Training', role: 'SEO, SEM, landing page direction, reporting', impact: 'Connected high-intent search demand with B2B lead generation.', accent: 'pink', layout: 'corp' },
-  { name: 'Biztech Academy', url: 'biztechacademy.id', type: 'SEO / Paid Media', industry: 'Business & Tech Training', role: 'Content-performance alignment and campaign structure', impact: 'Supported brand growth through structured digital acquisition.', accent: 'amber', layout: 'saas' },
-  { name: 'Trekking Indonesia', url: 'trekking.id', type: 'Website + Booking Growth', industry: 'Tourism Platform', role: 'Co-Founder & CTO, web infrastructure, SEO, UX', impact: 'Helped drive 40% booking growth through digital infrastructure.', accent: 'green', layout: 'commerce' },
+const cases: CaseStudy[] = [
+  {
+    title: 'Synergy Solusi',
+    domain: 'synergysolusi.com',
+    category: 'Website Growth · SEO · B2B Funnel',
+    summary: 'Corporate HSE consulting ecosystem optimized through SEO architecture, content direction, landing page improvement, and growth reporting.',
+    bullets: ['SEO/GEO reporting system', 'Website growth planning', 'Conversion direction'],
+    image: './project-shots/synergy.png',
+    accent: '#2ee6a6'
+  },
+  {
+    title: 'GRC Indonesia',
+    domain: 'grc-indonesia.com',
+    category: 'SEO System · Corporate Training',
+    summary: 'Governance, risk, and compliance platform strengthened through structured keyword mapping, content ecosystem, and technical SEO direction.',
+    bullets: ['GRC topic authority', 'Training funnel SEO', 'Multi-brand visibility'],
+    image: './project-shots/grc.png',
+    accent: '#7c5cff'
+  },
+  {
+    title: 'ITGID',
+    domain: 'itgid.org',
+    category: 'IT Governance · SEO/SEM · Community Funnel',
+    summary: 'IT governance knowledge platform built around high-intent content, certification journeys, community acquisition, and conversion paths.',
+    bullets: ['COBIT / CISA / CISM SEO', 'Community CTA funnel', 'B2B training discovery'],
+    image: './project-shots/itgid.png',
+    accent: '#ff9f43'
+  }
 ]
 
-const ecosystemSites = [
-  'fs-institute.org', 'grc-indonesia.com', 'ipqi.org', 'strategy.proxsisgroup.com',
-  'indonesiasafetycenter.org', 'petrotrainingasia.com', 'synergysolusi.com',
-  'environment-indonesia.com', 'it.proxsisgroup.com', 'itgid.org', 'isoindonesiacenter.com',
-  'icicert.com', 'biztechacademy.id', 'digital.proxsisgroup.com', 'hr.proxsisgroup.com'
+const miniProjects = [
+  ['FS Institute', 'Finance training SEO/SEM ecosystem'],
+  ['Biztech Academy', 'Business & tech academy acquisition system'],
+  ['Trekking Indonesia', 'Tourism platform web + booking growth'],
+  ['Guesthouse555nki', 'WA/IG AI admin automation'],
+  ['Proxsis HR & IT', 'AI admin + lead routing system'],
+  ['Digital Finger', 'Multi-division ops, tech, and growth system']
 ]
 
-const automationProjects = [
-  { title: 'WA & IG AI Admin Automation', brand: 'Guesthouse555nki', flow: ['DM/WA', 'AI Reply', 'Lead Capture', 'Follow-up'] },
-  { title: 'AI Admin Automation', brand: 'Proxsis HR & IT', flow: ['Inquiry', 'Qualification', 'Routing', 'Notification'] },
-  { title: 'Content Workflow Notification', brand: 'Internal Production System', flow: ['Task', 'Status', 'Webhook', 'Team Alert'] },
-]
+const skills = ['Website Development', 'SEO Architecture', 'SEM / Google Ads', 'Meta Ads', 'CRO', 'AI Automation', 'n8n Workflow', 'GA4 / GSC', 'Reporting System', 'Growth Strategy']
 
-function AccentOrb({ accent }: { accent: Project['accent'] }) {
-  return <span className={`accent-orb ${accent}`} />
-}
-
-function MockScreenshot({ project }: { project: Project }) {
-  const bars = Array.from({ length: 5 })
-  const cards = Array.from({ length: 4 })
+function ProjectShowcase({ item, index }: { item: CaseStudy; index: number }) {
   return (
-    <div className={`mock-screen ${project.layout} ${project.accent}`}>
-      <div className="mock-browser">
-        <span /> <span /> <span />
-        <em>{project.url}</em>
+    <article className="showcase-card" style={{ '--accent': item.accent } as React.CSSProperties}>
+      <div className="showcase-media">
+        {item.image ? <img src={item.image} alt={`${item.title} website screenshot`} /> : <div className="fake-screen" />}
+        <div className="media-glow" />
       </div>
-      <div className="mock-hero">
-        <div>
-          <small>{project.type}</small>
-          <strong>{project.name}</strong>
-          <p>{project.industry}</p>
-        </div>
-        <i />
-      </div>
-      <div className="mock-grid">
-        <div className="mock-panel large">
-          {bars.map((_, i) => <b key={i} style={{ width: `${92 - i * 12}%` }} />)}
-        </div>
-        <div className="mock-panel stats">
-          <strong>{project.layout === 'automation' ? 'AI' : project.accent === 'green' ? 'SEO' : 'GROWTH'}</strong>
-          <span>system</span>
-        </div>
-      </div>
-      <div className="mock-card-row">
-        {cards.map((_, i) => <span key={i} />)}
-      </div>
-    </div>
-  )
-}
-
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <article className="project-card">
-      <MockScreenshot project={project} />
-      <div className="project-copy">
-        <div className="project-meta"><AccentOrb accent={project.accent} /> {project.type}</div>
-        <h3>{project.name}</h3>
-        <p className="url">{project.url}</p>
-        <p>{project.role}</p>
-        <div className="impact">{project.impact}</div>
+      <div className="showcase-copy">
+        <span className="case-index">0{index + 1} / Featured Project</span>
+        <h3>{item.title}</h3>
+        <p className="domain">{item.domain}</p>
+        <p className="category">{item.category}</p>
+        <p className="summary">{item.summary}</p>
+        <ul>
+          {item.bullets.map(bullet => <li key={bullet}>✦ {bullet}</li>)}
+        </ul>
+        <a className="consult-btn" href={`https://${item.domain}`} target="_blank" rel="noreferrer">View Website</a>
       </div>
     </article>
   )
@@ -88,125 +76,111 @@ function ProjectCard({ project }: { project: Project }) {
 function App() {
   return (
     <main>
-      <nav className="nav">
-        <a className="brand" href="#top" aria-label="Muhammad Duha Alqausar portfolio">
-          <span>DA</span>
-          <strong>Duha Alqausar</strong>
-        </a>
-        <div className="nav-links">
-          <a href="#work">Work</a>
+      <div className="bg-grid" />
+      <div className="orb orb-a" />
+      <div className="orb orb-b" />
+
+      <header className="topbar">
+        <a className="logo" href="#top"><span>DA</span><b>duha.dev</b></a>
+        <nav>
+          <a href="#products">Products</a>
+          <a href="#projects">Projects</a>
           <a href="#systems">Systems</a>
-          <a href="#automation">Automation</a>
-          <a href="#contact">Contact</a>
+          <a href="#about">About</a>
+        </nav>
+        <div className="quick-actions">
+          <a className="icon-link" href="mailto:duha.alqausar@gmail.com" aria-label="Email">✉</a>
+          <a className="icon-link" href="tel:+6282284570795" aria-label="WhatsApp">☏</a>
+          <a className="book" href="#contact">Book a call</a>
         </div>
-      </nav>
+      </header>
 
-      <section id="top" className="hero section">
-        <div className="eyebrow"><span /> Growth & System Architect</div>
-        <h1>Building digital growth systems that make brands easier to find, trust, and convert.</h1>
-        <p className="hero-sub">I connect business strategy, website development, SEO/SEM, paid media, AI automation, and analytics into scalable growth engines for multi-brand ecosystems.</p>
-        <div className="hero-actions">
-          <a className="btn primary" href="#work">View Project Systems</a>
-          <a className="btn secondary" href="mailto:duha.alqausar@gmail.com">Contact Me</a>
+      <section id="top" className="hero">
+        <div className="hero-left">
+          <div className="availability"><i /> Available for Growth Systems & Automation</div>
+          <h1>Heyyoo!<br />I'm <span>Muhammad Duha Alqausar</span></h1>
+          <p className="role">
+            Growth & System Architect who delivers <b>Digital Growth Systems</b><br />
+            that connect the dots between <em>Business Goals</em> and <em>Scalable Execution</em>.
+          </p>
+          <div className="hero-buttons">
+            <a href="#projects">Projects</a>
+            <a href="mailto:duha.alqausar@gmail.com">Email</a>
+            <a href="https://github.com/Duha-alqausar/duha-portfolio" target="_blank" rel="noreferrer">Github</a>
+          </div>
         </div>
-        <div className="hero-dashboard">
-          <div className="terminal-card">
-            <div className="terminal-top"><span /><span /><span /><em>growth-system.ts</em></div>
-            <code>
-              <b>businessGoal</b> → website → SEO/SEM → lead flow<br />
-              <b>automation</b> → response system → reporting<br />
-              <b>optimizationLoop</b> → better traffic → better inquiry
-            </code>
-          </div>
-          <div className="metric-stack">
-            <div><strong>7+</strong><span>Years experience</span></div>
-            <div><strong>20+</strong><span>Brands managed</span></div>
-            <div><strong>15+</strong><span>Corporate SEO sites</span></div>
-            <div><strong>~30%</strong><span>Avg. revenue growth</span></div>
-          </div>
+        <div className="hero-badge">
+          <div className="avatar-ring"><span>DA</span></div>
+          <div className="floating-card c1">SEO · SEM · CRO</div>
+          <div className="floating-card c2">AI Automation</div>
+          <div className="floating-card c3">20+ Brands</div>
         </div>
       </section>
 
-      <section className="section statement">
-        <p>Not just running campaigns.</p>
-        <h2>I build the operating system behind digital growth.</h2>
-        <div className="pillar-grid">
-          {[
-            ['Website & CRO', 'Website structures, landing pages, UX conversion, and technical SEO foundations.'],
-            ['SEO & SEM', 'Keyword architecture, content strategy, paid search, and high-intent funnel mapping.'],
-            ['AI Automation', 'WhatsApp/Instagram AI admin, n8n workflows, lead routing, and internal notifications.'],
-            ['Analytics & Reporting', 'GA4, GSC, KPI systems, dashboard thinking, and performance reporting loops.'],
-          ].map(([title, body]) => (
-            <div className="pillar" key={title}><h3>{title}</h3><p>{body}</p></div>
-          ))}
+      <section id="products" className="stats-panel">
+        <div><strong>7+</strong><span>Years Experience</span></div>
+        <div><strong>20+</strong><span>Brands Managed</span></div>
+        <div><strong>15+</strong><span>Corporate Websites</span></div>
+        <div><strong>~30%</strong><span>Avg Growth Impact</span></div>
+      </section>
+
+      <section id="projects" className="section projects">
+        <div className="section-title">
+          <span>Selected Works</span>
+          <h2>Project showcase that looks visual, credible, and portfolio-worthy.</h2>
+          <p>Website screenshots, business context, and system-level contribution — so people can see the work and understand the impact.</p>
+        </div>
+        <div className="showcase-list">
+          {cases.map((item, index) => <ProjectShowcase key={item.title} item={item} index={index} />)}
         </div>
       </section>
 
-      <section id="work" className="section projects-section">
-        <div className="section-head">
-          <span className="kicker">Selected portfolio</span>
-          <h2>Project cards built to show the work visually — not just listed like a CV.</h2>
-          <p>Each card uses a browser-style project preview, role summary, and business impact so visitors instantly understand the depth of the work.</p>
-        </div>
-        <div className="project-grid">
-          {websiteProjects.map(project => <ProjectCard key={project.name} project={project} />)}
-        </div>
-      </section>
-
-      <section id="systems" className="section ecosystem">
-        <div className="section-head compact">
-          <span className="kicker">Multi-brand ecosystem</span>
-          <h2>SEO/SEM architecture across 15+ corporate websites.</h2>
-          <p>Structured keyword mapping, content planning, technical SEO, paid search alignment, and conversion funnel direction across consulting, training, certification, IT, safety, and business ecosystems.</p>
-        </div>
-        <div className="ecosystem-map">
-          <div className="core-node">
-            <span>Growth Engine</span>
-            <strong>SEO · SEM · Content · CRO</strong>
+      <section id="systems" className="section systems">
+        <div className="system-card">
+          <div>
+            <span>How I Work</span>
+            <h2>Business goal → Website → Traffic → Lead → Automation → Report.</h2>
           </div>
-          <div className="site-cloud">
-            {ecosystemSites.map((site, index) => <span style={{ '--i': index } as React.CSSProperties} key={site}>{site}</span>)}
+          <div className="flow-diagram">
+            {['Business', 'Website', 'SEO/Ads', 'Lead Flow', 'Automation', 'Report'].map((step, idx) => (
+              <div className="flow-node" key={step}><b>{String(idx + 1).padStart(2, '0')}</b>{step}</div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="automation" className="section automation">
-        <div className="section-head compact">
-          <span className="kicker">AI & workflow automation</span>
-          <h2>Automation projects that reduce manual work and speed up response time.</h2>
+      <section className="section mini-work">
+        <div className="section-title compact">
+          <span>More Ecosystem Work</span>
+          <h2>Not one-off execution. A multi-brand digital growth ecosystem.</h2>
         </div>
-        <div className="automation-grid">
-          {automationProjects.map(item => (
-            <article className="automation-card" key={item.title}>
-              <div className="auto-head"><span>AI FLOW</span><strong>{item.brand}</strong></div>
-              <h3>{item.title}</h3>
-              <div className="flow-row">
-                {item.flow.map((step, idx) => <div key={step} className="flow-step"><b>{String(idx + 1).padStart(2, '0')}</b>{step}</div>)}
-              </div>
+        <div className="mini-grid">
+          {miniProjects.map(([name, desc]) => (
+            <article key={name}>
+              <h3>{name}</h3>
+              <p>{desc}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="section case-study">
-        <div className="case-left">
-          <span className="kicker">Featured narrative</span>
-          <h2>From fragmented digital activity to structured growth system.</h2>
+      <section id="about" className="section about">
+        <div className="about-copy">
+          <span>About</span>
+          <h2>I operate between strategy, marketing, technology, and automation.</h2>
+          <p>My work is not only about launching websites or running campaigns. I design systems that help teams find opportunities, execute consistently, capture leads, reduce manual work, and measure growth.</p>
         </div>
-        <div className="case-right">
-          <div><b>01 · Diagnose</b><p>Audit the website, SEO performance, funnel gaps, tracking, and content opportunities.</p></div>
-          <div><b>02 · Architect</b><p>Design keyword maps, landing page structures, campaign flows, automation, and reporting framework.</p></div>
-          <div><b>03 · Execute</b><p>Coordinate content, paid media, technical SEO, website updates, and automation implementation.</p></div>
-          <div><b>04 · Optimize</b><p>Review data, identify bottlenecks, improve conversion points, and turn learnings into the next action plan.</p></div>
+        <div className="skill-cloud">
+          {skills.map(skill => <span key={skill}>{skill}</span>)}
         </div>
       </section>
 
-      <section id="contact" className="section contact">
-        <h2>Let’s build a growth system worth showing.</h2>
-        <p>Available for digital growth architecture, SEO/SEM ecosystems, website optimization, AI automation, and performance reporting systems.</p>
-        <div className="contact-row">
-          <a className="btn primary" href="mailto:duha.alqausar@gmail.com">duha.alqausar@gmail.com</a>
-          <a className="btn secondary" href="tel:+6282284570795">+62 822-8457-0795</a>
+      <section id="contact" className="contact-section">
+        <p>Have a project, website, or growth system to build?</p>
+        <h2>Let's make it look impressive and work like a system.</h2>
+        <div>
+          <a href="mailto:duha.alqausar@gmail.com">duha.alqausar@gmail.com</a>
+          <a href="tel:+6282284570795">WhatsApp / Call</a>
         </div>
       </section>
     </main>
