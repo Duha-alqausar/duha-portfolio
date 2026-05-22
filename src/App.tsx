@@ -21,13 +21,13 @@ const cases: CaseStudy[] = [
     accent: '#2ee6a6'
   },
   {
-    title: 'GRC Indonesia',
-    domain: 'grc-indonesia.com',
-    category: 'SEO System · Corporate Training',
-    summary: 'Governance, risk, and compliance platform strengthened through structured keyword mapping, content ecosystem, and technical SEO direction.',
-    bullets: ['GRC topic authority', 'Training funnel SEO', 'Multi-brand visibility'],
-    image: './project-shots/grc.webp',
-    accent: '#7c5cff'
+    title: 'Proxsis Group',
+    domain: 'proxsisgroup.com',
+    category: 'Website Growth · Corporate Ecosystem',
+    summary: 'Corporate group website highlighted as the main Proxsis ecosystem gateway, connecting solutions, academy, sustainability, digital services, and business enquiries.',
+    bullets: ['Corporate ecosystem gateway', 'Solutions navigation', 'B2B enquiry direction'],
+    image: './project-shots/proxsisgroup.webp',
+    accent: '#e7194f'
   },
   {
     title: 'ITGID',
