@@ -17,7 +17,7 @@ const cases: CaseStudy[] = [
     category: 'Website Growth · SEO · B2B Funnel',
     summary: 'Corporate HSE consulting ecosystem optimized through SEO architecture, content direction, landing page improvement, and growth reporting.',
     bullets: ['SEO/GEO reporting system', 'Website growth planning', 'Conversion direction'],
-    image: './project-shots/synergy.png',
+    image: './project-shots/synergy.webp',
     accent: '#2ee6a6'
   },
   {
@@ -26,7 +26,7 @@ const cases: CaseStudy[] = [
     category: 'SEO System · Corporate Training',
     summary: 'Governance, risk, and compliance platform strengthened through structured keyword mapping, content ecosystem, and technical SEO direction.',
     bullets: ['GRC topic authority', 'Training funnel SEO', 'Multi-brand visibility'],
-    image: './project-shots/grc.png',
+    image: './project-shots/grc.webp',
     accent: '#7c5cff'
   },
   {
@@ -35,7 +35,7 @@ const cases: CaseStudy[] = [
     category: 'IT Governance · SEO/SEM · Community Funnel',
     summary: 'IT governance knowledge platform built around high-intent content, certification journeys, community acquisition, and conversion paths.',
     bullets: ['COBIT / CISA / CISM SEO', 'Community CTA funnel', 'B2B training discovery'],
-    image: './project-shots/itgid.png',
+    image: './project-shots/itgid.webp',
     accent: '#ff9f43'
   }
 ]
@@ -55,7 +55,7 @@ function ProjectShowcase({ item, index }: { item: CaseStudy; index: number }) {
   return (
     <article className="showcase-card" style={{ '--accent': item.accent } as React.CSSProperties}>
       <div className="showcase-media">
-        {item.image ? <img src={item.image} alt={`${item.title} website screenshot`} /> : <div className="fake-screen" />}
+        {item.image ? <img src={item.image} alt={`${item.title} website screenshot`} decoding="async" /> : <div className="fake-screen" />}
         <div className="media-glow" />
       </div>
       <div className="showcase-copy">
